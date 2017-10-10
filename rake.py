@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -- coding: utf8 --
 
 # Implementation of RAKE - Rapid Automtic Keyword Exraction algorithm
 # as described in:
@@ -8,7 +8,6 @@
 
 import re
 import operator
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 debug = False
 test = True
@@ -123,7 +122,7 @@ def generate_candidate_keyword_scores(phrase_list, word_score):
 
 
 class Rake(object):
-    def __init__(self, stop_words_path):
+    def _init_(self, stop_words_path):
         self.stop_words_path = stop_words_path
         self.__stop_words_pattern = build_stop_word_regex(stop_words_path)
 
@@ -141,14 +140,17 @@ class Rake(object):
 
 
 if test:
-    text = "Jadi secara konsep basis data atau database adalah kumpulan dari data-data yang membentuk suatu berkas (file) yang saling berhubungan (relation) dengan tatacara yang tertentu untuk membentuk data baru atau informasi. Atau basis data (database) merupakan kumpulan dari data yang saling berhubungan (relasi) antara satu dengan yang lainnya yang diorganisasikan berdasarkan skema atau struktur tertentu. Pada komputer, basis data disimpan dalam perangkat hardware penyimpan, dan dengan software tertentu dimanipulasiunruk kepentingan atau keguanaan tertentu. Hubungan atau relasi data biasanya ditunjukkan dengan kunci (key) dari tiap file yang ada. Data merupakan fakta atau nilai (value) yang tercatat atau merepresentasikan deskripsi dari suatu objek. Data yang merupakan fakta yang tercatat dan selanjutnya dilakukan pengolahan (proses) menjadi bentuk yang berguna atau bermanfaat bagi pemakainya akan membentuk apa yang disebut informasi. Bentuk informasi yang kompleks dan teritegrasi dan pengolahan sebuah database dengan komputer akan digunakan untuk proses pengambilan keputusan pada manajemen akan membenuk Sistem Informasi Manajemen (SIM), data dalam basis data merupan item terkecil dan terpenting untuk membangun basis data yang baik dan valid."
-    factory = StemmerFactory()
-    stemmer = factory.create_stemmer()
+    #text = "Jadi secara konsep basis data atau database adalah kumpulan dari data-data yang membentuk suatu berkas (file) yang saling berhubungan (relation) dengan tatacara yang tertentu untuk membentuk data baru atau informasi. Atau basis data (database) merupakan kumpulan dari data yang saling berhubungan (relasi) antara satu dengan yang lainnya yang diorganisasikan berdasarkan skema atau struktur tertentu. Pada komputer, basis data disimpan dalam perangkat hardware penyimpan, dan dengan software tertentu dimanipulasiunruk kepentingan atau keguanaan tertentu. Hubungan atau relasi data biasanya ditunjukkan dengan kunci (key) dari tiap file yang ada. Data merupakan fakta atau nilai (value) yang tercatat atau merepresentasikan deskripsi dari suatu objek. Data yang merupakan fakta yang tercatat dan selanjutnya dilakukan pengolahan (proses) menjadi bentuk yang berguna atau bermanfaat bagi pemakainya akan membentuk apa yang disebut informasi. Bentuk informasi yang kompleks dan teritegrasi dan pengolahan sebuah database dengan komputer akan digunakan untuk proses pengambilan keputusan pada manajemen akan membenuk Sistem Informasi Manajemen (SIM), data dalam basis data merupan item terkecil dan terpenting untuk membangun basis data yang baik dan valid."
+    #factory = StemmerFactory()
+    #stemmer = factory.create_stemmer()
 
     # stemming process
     # text   = stemmer.stem(text)
     # Split text into sentences
-    sentenceList = split_sentences(text)
+    abstract = open('abstract.txt', 'r') 
+    abstract= abstract.read()
+    #abstract = "abstract.txt" 
+    sentenceList = split_sentences(abstract)
     stoppath = "stoplist.txt" 
     stopwordpattern = build_stop_word_regex(stoppath)
 
@@ -167,6 +169,8 @@ if test:
 
     totalKeywords = len(sortedKeywords)
     if debug: print totalKeywords
-    print sortedKeywords[0:(totalKeywords / 3)]
+    #print sortedKeywords[0:(totalKeywords / 3)] 
+    print('Keyword ' + str(sortedKeywords ) + '\n')
+    #rint('Keyword %d ' %  )
 
-    print sortedKeywords
+   # print sortedKeywords
