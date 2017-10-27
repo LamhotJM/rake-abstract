@@ -9,6 +9,11 @@ Impementing RAKE algorithm to gererate keywords from abstract.
 - Install system package. See the `system_package.txt` file. (*Unix)
 
 - Create virtual enviroment (use `virtualenv`) and activate it.
+```
+ - pip install virtualenv
+ - virtualenv env
+ - source venv/bin/activate
+```
 
 - Then install python packages:  
 ```
@@ -22,4 +27,3 @@ $ python app.py
 ```
 
 - Go to http://127.0.0.1
-
