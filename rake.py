@@ -138,39 +138,27 @@ class Rake(object):
         sorted_keywords = sorted(keyword_candidates.iteritems(), key=operator.itemgetter(1), reverse=True)
         return sorted_keywords
 
+    def genereting_rake(self, path):
+        abstract = open(path, 'r') 
+        abstract= abstract.read()
+        #abstract = "abstract.txt" 
+        sentenceList = split_sentences(abstract)
+        stoppath = "stoplist.txt" 
+        stopwordpattern = build_stop_word_regex(stoppath)
 
-if test:
-    #text = "Jadi secara konsep basis data atau database adalah kumpulan dari data-data yang membentuk suatu berkas (file) yang saling berhubungan (relation) dengan tatacara yang tertentu untuk membentuk data baru atau informasi. Atau basis data (database) merupakan kumpulan dari data yang saling berhubungan (relasi) antara satu dengan yang lainnya yang diorganisasikan berdasarkan skema atau struktur tertentu. Pada komputer, basis data disimpan dalam perangkat hardware penyimpan, dan dengan software tertentu dimanipulasiunruk kepentingan atau keguanaan tertentu. Hubungan atau relasi data biasanya ditunjukkan dengan kunci (key) dari tiap file yang ada. Data merupakan fakta atau nilai (value) yang tercatat atau merepresentasikan deskripsi dari suatu objek. Data yang merupakan fakta yang tercatat dan selanjutnya dilakukan pengolahan (proses) menjadi bentuk yang berguna atau bermanfaat bagi pemakainya akan membentuk apa yang disebut informasi. Bentuk informasi yang kompleks dan teritegrasi dan pengolahan sebuah database dengan komputer akan digunakan untuk proses pengambilan keputusan pada manajemen akan membenuk Sistem Informasi Manajemen (SIM), data dalam basis data merupan item terkecil dan terpenting untuk membangun basis data yang baik dan valid."
-    #factory = StemmerFactory()
-    #stemmer = factory.create_stemmer()
+        # generate candidate keywords
+        phraseList = generate_candidate_keywords(sentenceList, stopwordpattern)
 
-    # stemming process
-    # text   = stemmer.stem(text)
-    # Split text into sentences
-    abstract = open('abstract.txt', 'r') 
-    abstract= abstract.read()
-    #abstract = "abstract.txt" 
-    sentenceList = split_sentences(abstract)
-    stoppath = "stoplist.txt" 
-    stopwordpattern = build_stop_word_regex(stoppath)
+        # calculate individual word scores
+        wordscores = calculate_word_scores(phraseList)
 
-    # generate candidate keywords
-    phraseList = generate_candidate_keywords(sentenceList, stopwordpattern)
+        # generate candidate keyword scores
+        keywordcandidates = generate_candidate_keyword_scores(phraseList, wordscores)
+        if debug: print keywordcandidates
 
-    # calculate individual word scores
-    wordscores = calculate_word_scores(phraseList)
+        sortedKeywords = sorted(keywordcandidates.iteritems(), key=operator.itemgetter(1), reverse=True)
+        if debug: print sortedKeywords
 
-    # generate candidate keyword scores
-    keywordcandidates = generate_candidate_keyword_scores(phraseList, wordscores)
-    if debug: print keywordcandidates
-
-    sortedKeywords = sorted(keywordcandidates.iteritems(), key=operator.itemgetter(1), reverse=True)
-    if debug: print sortedKeywords
-
-    totalKeywords = len(sortedKeywords)
-    if debug: print totalKeywords
-    #print sortedKeywords[0:(totalKeywords / 3)] 
-    print('Keyword ' + str(sortedKeywords ) + '\n')
-    #rint('Keyword %d ' %  )
-
-   # print sortedKeywords
+        totalKeywords = len(sortedKeywords)
+        if debug: print totalKeywords
+        print('Keyword ' + str(sortedKeywords ) + '\n')

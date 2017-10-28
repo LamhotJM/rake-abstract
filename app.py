@@ -5,12 +5,17 @@
 # Git repository: https://github.com/ngoduykhanh/flask-file-uploader
 # This work based on jQuery-File-Upload which can be found at https://github.com/blueimp/jQuery-File-Upload/
 
+import re
+import operator
+
+debug = False
+test = True
+from rake import Rake
 import os
 import PIL
 from PIL import Image
 import simplejson
 import traceback
-
 from flask import Flask, request, render_template, redirect, url_for, send_from_directory
 from flask_bootstrap import Bootstrap
 from werkzeug import secure_filename
@@ -48,6 +53,11 @@ def gen_file_name(filename):
 
     return filename
 
+def generate_rake(path):
+     print "path %s" % (path)
+     rake = Rake()
+     rake.genereting_rake(path)
+     return path
 
 def create_thumbnail(image):
     try:
@@ -92,8 +102,10 @@ def upload():
 
                 # return json for js call back
                 result = uploadfile(name=filename, type=mime_type, size=size)
-            
-            return simplejson.dumps({"files": [result.get_file()]})
+
+                generate_rake(uploaded_file_path)
+                
+                return simplejson.dumps({"files": [result.get_file()]})
 
     if request.method == 'GET':
         # get all file in ./data directory
@@ -146,3 +158,4 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
