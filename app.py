@@ -49,8 +49,9 @@ def gen_file_name(filename):
 def generate_rake(path):
      print "path %s" % (path)
      rake = Rake()
-     rake.genereting_rake(path)
-     return path
+     rake =rake.genereting_rake(path)
+     print('Keyword ' + str(rake ) + '\n')
+     return rake
 
 def create_thumbnail(image):
     try:
@@ -96,9 +97,10 @@ def upload():
                 # return json for js call back
                 result = uploadfile(name=filename, type=mime_type, size=size)
 
-                generate_rake(uploaded_file_path)
+                rakes = generate_rake(uploaded_file_path)
                 
-                return simplejson.dumps({"files": [result.get_file()]})
+                return simplejson.dumps({"files": [result.get_file()]
+                    ,"rakes": [rakes]})
 
     if request.method == 'GET':
         # get all file in ./data directory

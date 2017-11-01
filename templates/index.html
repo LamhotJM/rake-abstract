@@ -2,6 +2,30 @@
 {% block title %}File Uploader{% endblock %}
 
 {% block page_content %}
+<html>
+<body>
+Masukkan Abstract<br>
+<textarea id="myTextarea">
+342 Alvin Road
+Ducksburg</textarea>
+
+<p>Lorem Ipsum</p>
+
+<button type="button" onclick="myFunction()">Extract</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("myTextarea").value;
+    document.getElementById("demo").innerHTML = x;
+}
+</script>
+
+</body>
+</html>
+
+
 <div class="container">
     <h1>Upload Abstract</h1>
     <br>

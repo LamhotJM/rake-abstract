@@ -153,4 +153,6 @@ class Rake(object):
 
         totalKeywords = len(sortedKeywords)
         if debug: print totalKeywords
-        print('Keyword ' + str(sortedKeywords ) + '\n')
+        #print('Keyword ' + str(sortedKeywords ) + '\n')
+
+        return sortedKeywords
