@@ -12,7 +12,15 @@ Impementing RAKE algorithm to gererate keywords from abstract.
 ```
  - pip install virtualenv
  - virtualenv env
- - source venv/bin/activate
+ - source env/bin/activate
+```
+- Windows
+
+```
+ - pip install virtualenv
+ - virtualenv env
+ - cd env/scripts
+ - activate
 ```
 
 - Then install python packages:  
