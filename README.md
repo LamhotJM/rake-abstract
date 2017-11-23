@@ -28,8 +28,8 @@ Impementing RAKE algorithm to gererate keywords from abstract.
 ```
  - cd env/scripts
  - activate
- -cd ..
- -cd . 
+ - cd ..
+ - cd ..
 ```
 
 - Then install python packages:  
