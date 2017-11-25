@@ -14,7 +14,7 @@ from flask_bootstrap import Bootstrap
 from werkzeug import secure_filename
 
 from lib.upload_file import uploadfile
-
+from flask import jsonify
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
@@ -68,7 +68,21 @@ def create_thumbnail(image):
         print traceback.format_exc()
         return False
 
+@app.route('/interactive/')
+def interactive():
+    return render_template('interactive.html')
 
+@app.route('/background_process')
+def background_process():
+    try:
+        lang = request.args.get('proglang', 0, type=str)
+        if lang.lower() == 'python':
+            return jsonify(result='You are wise')
+        else:
+            return jsonify(result='Try again.')
+    except Exception as e:
+        return str(e)
+        
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
