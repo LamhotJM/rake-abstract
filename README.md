@@ -26,10 +26,8 @@ Impementing RAKE algorithm to gererate keywords from abstract.
 - Windows (environment has been already created)
 
 ```
- - cd env/scripts
- - activate
- - cd ..
- - cd ..
+source env/scripts/activate
+
 ```
 
 - Then install python packages:  
