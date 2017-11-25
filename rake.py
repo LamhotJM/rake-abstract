@@ -113,35 +113,38 @@ def generate_candidate_keyword_scores(phrase_list, word_score):
     return keyword_candidates
 
 
+def generate_rake_abstact(txt):
+    sentenceList = split_sentences(txt)
+    stoppath = "stoplist.txt" 
+    stopwordpattern = build_stop_word_regex(stoppath)
+
+    # generate candidate keywords
+    phraseList = generate_candidate_keywords(sentenceList, stopwordpattern)
+
+    # calculate individual word scores
+    wordscores = calculate_word_scores(phraseList)
+
+    # generate candidate keyword scores
+    keywordcandidates = generate_candidate_keyword_scores(phraseList, wordscores)
+    if debug: print keywordcandidates
+
+    sortedKeywords = sorted(keywordcandidates.iteritems(), key=operator.itemgetter(1), reverse=True)
+    if debug: print sortedKeywords
+
+    totalKeywords = len(sortedKeywords)
+    if debug: print totalKeywords
+
+    return sortedKeywords
+
 class Rake(object):
     def _init_(self, stop_words_path):
         self.stop_words_path = stop_words_path
         self.__stop_words_pattern = build_stop_word_regex(stop_words_path)
 
-    def genereting_rake(self, path):
+    def generete_keyword_from_file(self, path):
         abstract = open(path, 'r') 
         abstract= abstract.read()
-        #abstract = "abstract.txt" 
-        sentenceList = split_sentences(abstract)
-        stoppath = "stoplist.txt" 
-        stopwordpattern = build_stop_word_regex(stoppath)
+        return generate_rake_abstact(abstract)
 
-        # generate candidate keywords
-        phraseList = generate_candidate_keywords(sentenceList, stopwordpattern)
-
-        # calculate individual word scores
-        wordscores = calculate_word_scores(phraseList)
-
-        # generate candidate keyword scores
-        keywordcandidates = generate_candidate_keyword_scores(phraseList, wordscores)
-        if debug: print keywordcandidates
-
-        sortedKeywords = sorted(keywordcandidates.iteritems(), key=operator.itemgetter(1), reverse=True)
-        if debug: print sortedKeywords
-
-        totalKeywords = len(sortedKeywords)
-        if debug: print totalKeywords
-        #print('Keyword ' + str(sortedKeywords ) + '\n')
-
-        return sortedKeywords
-
+    def generete_keyword_from_textarea(self, txt):
+        return generate_rake_abstact(txt)

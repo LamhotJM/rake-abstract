@@ -1,3 +1,4 @@
+{% extends "index.html" %}
 {% block body %}
 	<head>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -17,12 +18,17 @@
   
 	<body>
 		<div class='container'>
-		<h3>Welcome! Which is the best programming language of them all?</h3>
-			<form>
-			 <textarea type=text size=5 name=proglang></textarea>
+		<div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Masukkan Abstract</h3>
+        </div>
+        <div class="panel-body">
+        <form>
+			 <textarea type=text rows="10" cols="100" name=proglang></textarea>
+			 <br></br>
 			 <a href=# id=process_input><button class='btn btn-default'>Submit</button></a>
-			</form>
-		<p id=result></p>
-		</div>
+		</form>
+        <p id=result></p>
+        </div>
 	</body>
 {% endblock %}

@@ -49,25 +49,6 @@
         <!-- The table listing the files available for upload/download -->
         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
     </form>
-    <br>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Masukkan Abstract</h3>
-        </div>
-        <div class="panel-body">
-        <textarea id="myTextarea"></textarea>
-           <p>Hasil Ekstraksi:</p>
-           <button type="button" onclick="myFunction()">Extract</button>
-        <p id="result"></p>
-        <script>
-        function myFunction() {
-            var x = document.getElementById("myTextarea").value;
-            document.getElementById("result").innerHTML = x;
-        }
-        </script>
-
-        </div>
-    </div>
 </div>
 <!-- The blueimp Gallery widget -->
 <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">

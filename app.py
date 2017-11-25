@@ -48,10 +48,10 @@ def gen_file_name(filename):
 
 def generate_rake(path):
      print "path %s" % (path)
-     rake = Rake()
-     rake =rake.genereting_rake(path)
-     print('Keyword ' + str(rake ) + '\n')
-     return rake
+     RakeObj = Rake()
+     keyword = RakeObj.generete_keyword_from_file(path)
+     print('Keyword ' + str(keyword) + '\n')
+     return keyword
 
 def create_thumbnail(image):
     try:
@@ -68,7 +68,7 @@ def create_thumbnail(image):
         print traceback.format_exc()
         return False
 
-@app.route('/interactive/')
+@app.route('/textarea')
 def interactive():
     return render_template('interactive.html')
 
@@ -76,10 +76,13 @@ def interactive():
 def background_process():
     try:
         lang = request.args.get('proglang', 0, type=str)
-        if lang.lower() == 'python':
-            return jsonify(result='You are wise')
+        if lang.lower() == '':
+            return jsonify(result='Silahkan Masukkan Abstrak')
         else:
-            return jsonify(result='Try again.')
+            RakeObj = Rake()
+            keyword = RakeObj.generete_keyword_from_textarea(lang)
+            print('Keyword ' + str(keyword) + '\n')
+            return jsonify(result=keyword)
     except Exception as e:
         return str(e)
         
