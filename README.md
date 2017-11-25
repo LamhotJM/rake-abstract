@@ -2,7 +2,7 @@ RAKE -> case abstract
 ===================
 
 ## Description
-Impementing RAKE algorithm to gererate keywords from abstract.
+Implementing RAKE algorithm to gererate keywords from abstract.
 
 
 ## Setup
