@@ -118,18 +118,6 @@ class Rake(object):
         self.stop_words_path = stop_words_path
         self.__stop_words_pattern = build_stop_word_regex(stop_words_path)
 
-    def run(self, text):
-        sentence_list = split_sentences(text)
-
-        phrase_list = generate_candidate_keywords(sentence_list, self.__stop_words_pattern)
-
-        word_scores = calculate_word_scores(phrase_list)
-
-        keyword_candidates = generate_candidate_keyword_scores(phrase_list, word_scores)
-
-        sorted_keywords = sorted(keyword_candidates.iteritems(), key=operator.itemgetter(1), reverse=True)
-        return sorted_keywords
-
     def genereting_rake(self, path):
         abstract = open(path, 'r') 
         abstract= abstract.read()
