@@ -1,4 +1,4 @@
-RAKE -> case abstract
+Rapid Automatic Keyword Extraction
 ===================
 
 ## Description
